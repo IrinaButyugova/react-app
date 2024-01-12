@@ -8,11 +8,29 @@ import {
 import Login from "./Login"
 import Main from "./Main";
 import About from "./About";
+import ThemedButton from "./ThemedButton";
+import { StateProvider } from './state';
 
-class App extends Component {
-  render() {
-    return (
-      <BrowserRouter>
+export default function App () {
+  const initialState = {
+    theme: { primary: 'green' }
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'changeTheme':
+        return {
+          ...state,
+          theme: action.newTheme
+        };        
+      default:
+        return state;
+    }
+  };  
+  return (
+    <StateProvider initialState={initialState} reducer={reducer}>
+        <ThemedButton/>
+        <BrowserRouter>
         <div>
           <h1>Simple SPA</h1>
           <ul className="header">
@@ -29,8 +47,6 @@ class App extends Component {
           </div>
         </div>
       </BrowserRouter>
-    );
-  }
+    </StateProvider>
+  );
 }
-
-export default App;
