@@ -16,6 +16,7 @@ import { getDataRequest, getPostsRequest,
 import UserForm from './UserForm';
 import StepForm from './stepForm/StepForm'
 import ItemsList from "./SearchForm/ItemsList";
+import FormikForm from "./formikForm/formikForm";
 
 // export default function App () {
 //   const initialState = {
@@ -93,6 +94,7 @@ CLick to Add Post
         <UserForm name="" age="0" />
         <StepForm />
         <ItemsList data={propsValues} />
+        <FormikForm />
       </div>
     )
   }
