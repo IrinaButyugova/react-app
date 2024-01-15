@@ -15,6 +15,7 @@ import { getDataRequest, getPostsRequest,
   createPostRequest } from './actions/data'; 
 import UserForm from './UserForm';
 import StepForm from './stepForm/StepForm'
+import ItemsList from "./SearchForm/ItemsList";
 
 // export default function App () {
 //   const initialState = {
@@ -56,6 +57,18 @@ import StepForm from './stepForm/StepForm'
 //   );
 // }
 
+const propsValues = {
+  title: "Smartphone list",
+  items: [
+          "Samsung Galaxy Note20", 
+          "Apple iPhone 12 Pro", 
+          "Google Pixel 5", 
+          "Huawei P40 Pro", 
+          "OnePlus 8 Pro", 
+          "Asus Zenfone 7 Pro"
+  ]
+};
+
 class App extends Component {
   componentDidMount() {
     this.props.getDataRequest();
@@ -79,6 +92,7 @@ CLick to Add Post
 
         <UserForm name="" age="0" />
         <StepForm />
+        <ItemsList data={propsValues} />
       </div>
     )
   }
