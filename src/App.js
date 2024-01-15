@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { getDataRequest, getPostsRequest,
   createPostRequest } from './actions/data'; 
 import UserForm from './UserForm';
+import StepForm from './stepForm/StepForm'
 
 // export default function App () {
 //   const initialState = {
@@ -77,6 +78,7 @@ CLick to Add Post
         </button>
 
         <UserForm name="" age="0" />
+        <StepForm />
       </div>
     )
   }
