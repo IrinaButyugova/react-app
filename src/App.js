@@ -13,6 +13,7 @@ import { StateProvider } from './state';
 import { connect } from 'react-redux';
 import { getDataRequest, getPostsRequest,
   createPostRequest } from './actions/data'; 
+import UserForm from './UserForm';
 
 // export default function App () {
 //   const initialState = {
@@ -74,6 +75,8 @@ class App extends Component {
         <button onClick={() => this.props.createPostRequest({"post": "Random Num Post - "})}>
 CLick to Add Post
         </button>
+
+        <UserForm name="" age="0" />
       </div>
     )
   }
