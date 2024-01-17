@@ -5,15 +5,15 @@ import {
   BrowserRouter,
   Routes
 } from "react-router-dom";
-import Login from "./Login"
-import Main from "./Main";
-import About from "./About";
-import ThemedButton from "./ThemedButton";
+import Login from "./components/Login/Login"
+import Main from "./components/Main/Main";
+import About from "./components/About/About";
+import ThemedButton from "./components/ThemedButton/ThemedButton";
 import { StateProvider } from './state';
 import { connect } from 'react-redux';
 import { getDataRequest, getPostsRequest,
   createPostRequest } from './actions/data'; 
-import UserForm from './UserForm';
+import UserForm from './components/UserForm/UserForm';
 import StepForm from './stepForm/StepForm'
 import ItemsList from "./SearchForm/ItemsList";
 import FormikForm from "./formikForm/formikForm";

@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * User Form.
+ * @visibleName The Best Form Ever 🐙
+ */
 export default class UserForm extends React.Component {
     constructor(props) {
       super(props);
@@ -13,9 +17,21 @@ export default class UserForm extends React.Component {
       this.onAgeChange = this.onAgeChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
+    
+    /**
+	 * Validates user age. This method is not marked @public and is not visible in the style guide.
+	 */
       validateAge(age){
           return age >= 0;
       }
+
+    /**
+	 * Validates user name.
+     * @public
+	 * @version 1.0.5
+	 * @param {String} [name=''] New value for name
+	 * @returns {boolean} true if name is valid, overwise - false
+	 */
       validateName(name){
           return name.length > 2;
       }

@@ -1,4 +1,4 @@
-import { useStateValue } from './state';
+import { useStateValue } from '../../state';
 import { Button } from 'react-bootstrap';
 
 export default function ThemedButton(){
