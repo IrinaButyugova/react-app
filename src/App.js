@@ -1,4 +1,4 @@
-import React, { useEffect  } from "react";
+import React, { useEffect, useState  } from "react";
 import {
   Route,
   NavLink,
@@ -17,7 +17,8 @@ import UserForm from './components/UserForm/UserForm';
 import StepForm from './stepForm/StepForm'
 import ItemsList from "./SearchForm/ItemsList";
 import FormikForm from "./formikForm/formikForm";
-import ErrorBoundary from './withErrorBoundary.js'
+import { ErrorBoundary} from 'react-error-boundary'
+import SimulateErrorButton from './components/SimulateError/SimulateErrorButton'
 
 // export default function App () {
 //   const initialState = {
@@ -76,30 +77,40 @@ function App() {
   const data = useSelector((state) => state.data)
   const posts = useSelector((state) => state.posts)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     dispatch(getDataRequest());
     dispatch(getPostsRequest());
   }, []);
 
-  const simulateError = () => {
-    throw new Error('Sample Error')
-  };
-
   const ErrorMsg = (error) => {
     return (
         <div>
             <p>Something went wrong!!!</p>
             <p>{error.error.message}</p>
+            <button onClick={handleResetError}>Try again</button>
         </div>
     );
+};
+
+const logError = (error) => {
+  setErrorMessage(error.message);
+  console.log("logError:" + error.message);
+};
+
+
+const handleResetError = () => {
+  setErrorMessage("");
+  console.log("Error boundary reset");
 };
   
     return(
       <div>
-        <ErrorBoundary ErrorComponent={ErrorMsg}>
-          
+        <ErrorBoundary onError={logError} FallbackComponent={ErrorMsg} key={errorMessage}>
+
         <h1>
           {data.test}
           {posts?.data.map((e,i) => {
@@ -111,11 +122,9 @@ function App() {
         <button onClick={() => dispatch(createPostRequest({"post": "Random Num Post - "}))}>
           CLick to Add Post
         </button>
-        <button onClick={simulateError}>
-          Simulate Error
-        </button>
         
-        <UserForm  />
+        <SimulateErrorButton/>
+        <UserForm name="" age="0" />
         </ErrorBoundary>
         <StepForm />
         <ItemsList data={propsValues} />
