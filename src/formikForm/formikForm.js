@@ -60,7 +60,7 @@ const AuthForm = props => {
           <label className="label">Do you test your code?</label>
           {touched.test && errors.test && <p>{errors.test}</p>}
           <div className="control">
-            <label class="radio">
+            <label className="radio">
               <input name="test" type="radio" value="yes" checked={values.thing === 'yes'} className="radio" onChange={handleChange}
               />
               Yes
