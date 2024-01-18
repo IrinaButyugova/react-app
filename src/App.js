@@ -17,6 +17,7 @@ import UserForm from './components/UserForm/UserForm';
 import StepForm from './stepForm/StepForm'
 import ItemsList from "./SearchForm/ItemsList";
 import FormikForm from "./formikForm/formikForm";
+import ErrorBoundary from './withErrorBoundary.js'
 
 // export default function App () {
 //   const initialState = {
@@ -82,10 +83,23 @@ function App() {
     dispatch(getPostsRequest());
   }, []);
 
- 
+  const simulateError = () => {
+    throw new Error('Sample Error')
+  };
+
+  const ErrorMsg = (error) => {
+    return (
+        <div>
+            <p>Something went wrong!!!</p>
+            <p>{error.error.message}</p>
+        </div>
+    );
+};
   
     return(
       <div>
+        <ErrorBoundary ErrorComponent={ErrorMsg}>
+          
         <h1>
           {data.test}
           {posts?.data.map((e,i) => {
@@ -95,10 +109,14 @@ function App() {
           })}
         </h1>
         <button onClick={() => dispatch(createPostRequest({"post": "Random Num Post - "}))}>
-CLick to Add Post
+          CLick to Add Post
         </button>
-
-        <UserForm name="" age="0" />
+        <button onClick={simulateError}>
+          Simulate Error
+        </button>
+        
+        <UserForm  />
+        </ErrorBoundary>
         <StepForm />
         <ItemsList data={propsValues} />
         <FormikForm />
