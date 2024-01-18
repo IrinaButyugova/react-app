@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect  } from "react";
 import {
   Route,
   NavLink,
@@ -10,7 +10,7 @@ import Main from "./components/Main/Main";
 import About from "./components/About/About";
 import ThemedButton from "./components/ThemedButton/ThemedButton";
 import { StateProvider } from './state';
-import { connect } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { getDataRequest, getPostsRequest,
   createPostRequest } from './actions/data'; 
 import UserForm from './components/UserForm/UserForm';
@@ -70,24 +70,31 @@ const propsValues = {
   ]
 };
 
-class App extends Component {
-  componentDidMount() {
-    this.props.getDataRequest();
-    this.props.getPostsRequest();
-  }
+function App() {
 
-  render() {
+  const data = useSelector((state) => state.data)
+  const posts = useSelector((state) => state.posts)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getDataRequest());
+    dispatch(getPostsRequest());
+  }, []);
+
+ 
+  
     return(
       <div>
         <h1>
-          {this.props.data}
-          {this.props.posts?.data.map((e,i) => {
+          {data.test}
+          {posts?.data.map((e,i) => {
             return(
               <div key={i}>{e.msg}</div>
             )
           })}
         </h1>
-        <button onClick={() => this.props.createPostRequest({"post": "Random Num Post - "})}>
+        <button onClick={() => dispatch(createPostRequest({"post": "Random Num Post - "}))}>
 CLick to Add Post
         </button>
 
@@ -98,7 +105,6 @@ CLick to Add Post
       </div>
     )
   }
-}
 
 const mapStateToProps = (state) => {
   console.log("App State ->", state);
